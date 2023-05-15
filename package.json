@@ -9,17 +9,29 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@lens-protocol/react-web": "^1.1.0-next.3",
+    "@lens-protocol/wagmi": "^1.0.1",
     "@types/node": "20.1.4",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
+    "ethers": "^5.7.2",
+    "fs": "^0.0.1-security",
+    "net": "^1.0.2",
     "next": "13.4.2",
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.2",
-    "typescript": "5.0.4"
+    "tls": "^0.0.1",
+    "typescript": "5.0.4",
+    "wagmi": "0.12.13"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }
