@@ -1,6 +1,9 @@
+'use client'
+
 import { useActiveWallet } from '@lens-protocol/react-web';
 import { LogoutButton } from './logout';
 import { LoginButton } from './signin';
+import { MyProfile } from './activeprofile';
 
  export default function Authenticate() {
   const { data: wallet, loading } = useActiveWallet();
@@ -13,6 +16,8 @@ import { LoginButton } from './signin';
     return (
     <>
     <p>You are logged-in with {wallet.address}</p>
+    <MyProfile />
+
     <LogoutButton />
     </>
     );

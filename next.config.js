@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  module: {
-    transpilePackages: ['@lens-protocol']
-  }
-  
+  transpilePackages: ['@lens-protocol'],
+  experimental: {
+    esmExternals: false, // THIS IS THE FLAG THAT MATTERS
+  },
 }
 
 module.exports = nextConfig
+ 
