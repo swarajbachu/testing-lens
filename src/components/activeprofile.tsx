@@ -12,6 +12,7 @@ export function MyProfile() {
   return (
     <div>
       <p>Active profile: {data.handle}</p>
+
     </div>
   );
 }

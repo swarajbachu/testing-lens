@@ -1,48 +1,41 @@
-import { ContentFocus, ProfileOwnedByMe, useCreatePost } from '@lens-protocol/react-web';
-import { useState } from 'react';
+import React from 'react'
+
+import { ContentFocus, ProfileOwnedByMe, useCreatePost,  } from '@lens-protocol/react-web';
+
+export function Composer({ publisher }: { publisher: ProfileOwnedByMe }) {
 
 
- const uploadJson = (data: unknown): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const serialized = JSON.stringify(data);
-    
-      const url = URL.createObjectURL(new Blob([serialized], { type: 'application/json' }));
-    
-      resolve(url);
-    });
-  };
-  
+const { execute: create, error, isPending } = useCreatePost({  publisher, upload: uploadJson });
 
-  export function Composer({ publisher }: { publisher: ProfileOwnedByMe }) {
-    const { execute: create, error, isPending } = useCreatePost({ publisher, upload: uploadJson });
-    const [content, setContent] = useState('');
-  
-    const onSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      
-      await create({
-        content,
-        contentFocus: ContentFocus.TEXT,
-        locale: 'en',
-      });
-  
-      // Clear the content after submission
-      setContent('');
-    };
-  
-    return (
-      <form onSubmit={onSubmit}>
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Enter your post content"
-        ></textarea>
-  
-        <button type="submit" disabled={isPending}>
-          {isPending ? 'Creating...' : 'Create Post'}
-        </button>
-  
-        {error && <p>Error: {error.message}</p>}
-      </form>
-    );
+// Upload function
+async function uploadJson(data: unknown) {
+  try {
+    const response = await fetch('/api/upload', {
+      method: 'POST',
+      body: JSON.stringify(data), 
+    })
+    const json = await response.json()
+    return json.url
+  } catch(err) {
+    console.log({ err })
   }
+}
+
+// create post function
+async function createPost() {
+  await create({
+    content: "Hello World",
+    contentFocus: ContentFocus.TEXT,
+    locale: 'en',
+  })
+}
+
+
+
+  return (
+    <div>
+      <button onClick={createPost}>Create Post</button>
+    </div>
+  )
+}
+

@@ -4,9 +4,11 @@ import { useActiveWallet } from '@lens-protocol/react-web';
 import { LogoutButton } from './logout';
 import { LoginButton } from './signin';
 import { MyProfile } from './activeprofile';
+import {Composer} from './composer';
 
  export default function Authenticate() {
   const { data: wallet, loading } = useActiveWallet();
+  
 
   if (loading) {
     return <p>Loading...</p>;
@@ -17,7 +19,6 @@ import { MyProfile } from './activeprofile';
     <>
     <p>You are logged-in with {wallet.address}</p>
     <MyProfile />
-
     <LogoutButton />
     </>
     );
